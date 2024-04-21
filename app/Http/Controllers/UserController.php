@@ -59,8 +59,6 @@ class UserController extends Controller
         $saveUser->save();
 
         $saveQrCode = $this->generateUserQrCode($saveUser->id);
-
-        // flash()->success('Success','User created successfully!');
         return redirect()->route('admin.users')->with([
             'user' => Auth::user(),
             'success' => 'User created successfully'
