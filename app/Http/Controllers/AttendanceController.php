@@ -19,6 +19,7 @@ class AttendanceController extends Controller
             {
                 return response()->json(['error' => 'You are not ad admin and cannot register user attendance'], 400);
             }
+            //Attendance is only marked on Sundays, this line enforces that
             if (!now()->isSunday()) {
                 return response()->json(['error' => 'Attendance marking is only allowed on Sundays'], 400);
             }
@@ -29,11 +30,7 @@ class AttendanceController extends Controller
                 'recorded_by' => $loggedInUser
             ]);
             $attendance->save();
-            // return view('admin.users.add_users');
             return response()->json(['message' => 'Attendance marked successfully!'], 200);
-        // } catch (\Throwable $th) {
-        //     return response()->json(['error' => 'Invalid QR code or error marking attendance'], 400);
-        // }
     }
 
     public function getAttendanceList()

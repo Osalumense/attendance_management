@@ -41,7 +41,7 @@
                             <tr>
                                 <td>{{ $count }} </td>
                                 <td scope="row">{{ $user->user->surname}} {{ $user->user->othernames }}</td>
-                                <td>{{ $user->attendance_date }}
+                                <td>{{ \Carbon\Carbon::parse($user->attendance_date)->format('Y-m-d')}}
                                     @if ($user->isPresent == 1)
                                         <span class="badge badge-success badge-pill float-right">On Time</span>
                                     @else
@@ -55,7 +55,7 @@
                                 @endif</td>
                                 <td>{{ $user->user->group}}</td>
                                 <td>{{ $user->user->unit}}</td>                                
-                                <td>{{ Carbon::parse($user->attendance_date)->format('Y-m-d')}}</td>
+                                <td>{{ \Carbon\Carbon::parse($user->attendance_date)->format('h:i A')}}</td>
                                 
                             </tr>
                             @php
