@@ -46,12 +46,7 @@ class Attendance extends Model
     {
         $this->attributes['attendance_date'] = Carbon::parse($value);
     }
-
-    // public function getAttendanceDateTimeAttribute($value)
-    // {
-    //     return Carbon\Carbon::parse($value)->format('Y-m-d H:i:s'); // Format for display (optional)
-    // }
-
+    
     // public function setAttendanceDateTimeAttribute($value)
     // {
     //     $this->attributes['attendance_date'] = Carbon\Carbon::now();
