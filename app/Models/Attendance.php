@@ -47,8 +47,4 @@ class Attendance extends Model
         $this->attributes['attendance_date'] = Carbon::parse($value);
     }
     
-    // public function setAttendanceDateTimeAttribute($value)
-    // {
-    //     $this->attributes['attendance_date'] = Carbon\Carbon::now();
-    // }
 }
