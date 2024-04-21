@@ -50,6 +50,7 @@ Route::middleware(['auth','roles:admin'])->group(function(){
     Route::get('/admin/user/add', [UserController::class, 'addUser'])->name('users.add');
     Route::get('/admin/user/view/{userId}', [UserController::class, 'viewUser'])->name('users.view');
 
+    
     //User attendance routes
     Route::get('/admin/attendance/mark/{userId}', [AttendanceController::class, 'markAttendance'])->name('attendance.mark');
     Route::get('/admin/attendance', [AttendanceController::class, 'getAttendanceList'])->name('attendance.list');  
