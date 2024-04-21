@@ -15,9 +15,6 @@ class UserController extends Controller
 {
     public function index()
     {
-        
-        // return view('admin.users')->with(['employees'=> Employee::all(), 'schedules'=>Schedule::all()]);
-        // dd(User::getUsers());
         return view('admin.users.users')
         ->with(
             [
@@ -31,7 +28,6 @@ class UserController extends Controller
     {
         
         $postData = request()->all();
-        // dd($postData);
         $validators = Validator::make($request->input(), [
             'surname' => 'required|string|max:40',
             'othernames' => 'sometimes|string|max:150',
