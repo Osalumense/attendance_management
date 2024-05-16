@@ -36,23 +36,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
+                        @if(count($users) > 0)
+                            @foreach ($users as $user)
+                                <tr>
+                                    <th scope="row">{{ $user->id}}</th>
+                                    <td>{{ $user->surname}} {{ $user->othernames }}</td>
+                                    <td>{{ $user->email}}</td>
+                                    <td>{{ $user->tagNumber}}</td>
+                                    <td>{{ $user->group}}</td>
+                                    <td>{{ $user->unit}}</td>
+                                    <td>{{ $user->phone}}</td>
+                                    <td>
+                                        <div class="d-flex order-actions">
+                                            <a href="{{ url('/admin/user/view/'.$user->id) }}" class=""><i class='bx bxs-edit'></i></a>
+                                            <a href="javascript:;" class="ms-3"><i class='bx bxs-trash'></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @else
                             <tr>
-                                <th scope="row">{{ $user->id}}</th>
-                                <td>{{ $user->surname}} {{ $user->othernames }}</td>
-                                <td>{{ $user->email}}</td>
-                                <td>{{ $user->tagNumber}}</td>
-                                <td>{{ $user->group}}</td>
-                                <td>{{ $user->unit}}</td>
-                                <td>{{ $user->phone}}</td>
-                                <td>
-                                    <div class="d-flex order-actions">
-                                        <a href="{{ url('/admin/user/view/'.$user->id) }}" class=""><i class='bx bxs-edit'></i></a>
-                                        <a href="javascript:;" class="ms-3"><i class='bx bxs-trash'></i></a>
-                                    </div>
-                                </td>
+                                <th scope="row" class="text-center fw-4" colspan="8"><h4>No users added yet</h4></th>
                             </tr>
-                        @endforeach
+                        @endif
+                        
                     </tbody>
                 </table>
             </div>

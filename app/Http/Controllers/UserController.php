@@ -26,7 +26,6 @@ class UserController extends Controller
 
     public function createUser(Request $request)
     {
-        
         $postData = request()->all();
         $validators = Validator::make($request->input(), [
             'surname' => 'required|string|max:40',
@@ -83,7 +82,7 @@ class UserController extends Controller
                 File::makeDirectory($directoryPath, 0755, true, true);
             }
             $qrCodePath = 'qr_codes/user_' . $userId . '.png';
-            QrCode::size(500)->format('png')->generate('https://google.com', public_path($qrCodePath));
+            QrCode::size(500)->format('png')->generate(config('app.base_url').'/admin/attendance/mark/'.$user->id, public_path($qrCodePath));
             $user->qr_code = $qrCodePath;
             $user->save();
         }

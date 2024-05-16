@@ -25,7 +25,7 @@ class AdminController extends Controller
         $userData = $user->id . ', ' . $user->email;
         $qrCode = QrCode::size(500)
                 ->format('png')
-                ->generate('https://google.com', public_path('qr_codes/'. $user->id .'.png'));
+                ->generate(config('base_url').'/admin/attendance/mark/'.$user->id, public_path('qr_codes/'. $user->id .'.png'));
         
         // return view('qr-code');
         // $qrCode = QrCode::encoding('UTF-8')->format('png')->size(200)->generate($userData, public_path('qr_codes/' . $user->id . '_qr_code.png'));
