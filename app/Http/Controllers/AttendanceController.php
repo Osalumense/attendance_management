@@ -15,7 +15,7 @@ class AttendanceController extends Controller
         // try {
             $user = User::find($userId);
             $loggedInUser = Auth::user()->id;
-            if(!loggedInUser || Auth::user()->role !== 'admin')
+            if(!$loggedInUser || Auth::user()->role !== 'admin')
             {
                 return response()->json(['error' => 'You are not ad admin and cannot register user attendance'], 400);
             }
