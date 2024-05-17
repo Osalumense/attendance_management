@@ -75,7 +75,7 @@ class AttendanceController extends Controller
         // dd($startDate.' '. $endDate);
 
         // Retrieve all users
-        $users = User::where('role', '!=', 'admin');
+        $users = User::where('role', '!=', 'admin')->get();
         $attendanceRecords = Attendance::whereBetween('attendance_date', [$startDate, $endDate])
         ->get()
         ->groupBy('user_id');
