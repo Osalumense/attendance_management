@@ -67,7 +67,7 @@ class AttendanceController extends Controller
 
         // If there are no attendance records, set a default start date (e.g., 3 months ago)
         if (!$firstAttendanceDate) {
-            $startDate = Carbon::now()->subMonths(3)->startOfMonth();
+            $startDate = Carbon::now()->subMonths(1)->startOfMonth();
         } else {
             $startDate = Carbon::parse($firstAttendanceDate)->startOfMonth();
         }
