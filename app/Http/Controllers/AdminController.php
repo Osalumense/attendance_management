@@ -6,6 +6,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\User;
+use App\Models\Attendance;
+
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 use Illuminate\Support\Facades\Storage;
@@ -15,8 +18,42 @@ class AdminController extends Controller
     //
     public function adminDashboard()
     {
-        $user = Auth::user();
-        return view('admin.index')->with(['user'=> Auth::user()]);
+         // Data for the users chart
+         $userRegistrations = User::selectRaw('DATE(created_at) as date, COUNT(*) as count')
+         ->groupBy('date')
+         ->pluck('count', 'date')
+         ->toArray();
+
+        // $userDates = $userRegistrations->pluck('date');
+        // $userCounts = $userRegistrations->pluck('count');
+        // dd($userDates . ' '. $userCounts);
+        // Data for the attendance chart
+        $attendanceRecords = Attendance::selectRaw('DATE(created_at) as date, COUNT(*) as count')
+         ->groupBy('date')
+         ->pluck('count', 'date')
+         ->toArray();
+
+        $allDates = array_unique(array_merge(array_keys($userRegistrations), array_keys($attendanceRecords)));
+        sort($allDates);
+        $userCounts = [];
+        $attendanceCounts = [];
+    
+        foreach ($allDates as $date) {
+            $userCounts[] = $userRegistrations[$date] ?? 0;
+            $attendanceCounts[] = $attendanceRecords[$date] ?? 0;
+        }
+     
+        // $attendanceDates = $attendanceRecords->pluck('date');
+        // $attendanceCounts = $attendanceRecords->pluck('count');
+        return view('admin.index')->with([
+            'totalUsers' => User::countNonAdminUsers(),
+            'totalAttendanceCount' => Attendance::getTotalAttendanceCount(),
+            'todaysAttendanceCount' => Attendance::getTotalAttendanceCountForToday(),
+            'allDates' => $allDates,
+            'userCounts' => $userCounts,
+            'attendanceCounts' => $attendanceCounts,
+            'user'=> Auth::user()
+        ]);
     }
 
     public function generateUserQrCode()

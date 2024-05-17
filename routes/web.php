@@ -28,9 +28,7 @@ Route::get('/test', function () {
     return view('test');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [AdminController::class, 'adminDashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -55,6 +53,10 @@ Route::middleware(['auth','roles:admin'])->group(function(){
     Route::get('/admin/attendance/mark/{userId}', [AttendanceController::class, 'markAttendance'])->name('attendance.mark');
     Route::get('/admin/attendance', [AttendanceController::class, 'getAttendanceList'])->name('attendance.list');  
 });
+
+// Route::get('/attendance', function() {
+//     return view('admin.attendance.mark-attendance-response');
+// });
 
 Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');
 

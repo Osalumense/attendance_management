@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <div class="card">
+        {{-- <div class="card">
             <div class="card-body p-4">
                 <table class="table my-5 table-hover">
                     <thead>
@@ -65,7 +65,39 @@
                     </tbody>
                 </table>
             </div>
+        </div> --}}
+
+
+    <div class="card">
+        <div class="card-body">
+            <h3>Attendance Report</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        @foreach($sundays as $sunday)
+                            <th>{{ \Carbon\Carbon::parse($sunday)->format('d M Y') }}</th>
+                        @endforeach
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($attendanceData as $data)
+                        <tr>
+                            <td>{{ $data['user']->surname }} {{ $data['user']->othernames }}</td>
+                            @foreach($data['attendance'] as $date => $status)
+                                <td class="">
+                                    
+                                    <span class="{{ $status == 'Present' ? 'badge rounded-pill text-success bg-light-success p-2' : 'badge rounded-pill text-danger bg-light-danger p-2' }}">{{ $status }}</span>
+                                </td>
+                            @endforeach
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
+    </div>
+    </div>
+
 
     </div>
 @endsection

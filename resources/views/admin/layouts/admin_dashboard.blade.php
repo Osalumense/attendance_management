@@ -25,7 +25,7 @@
 	<link rel="stylesheet" href="{{asset('backend/assets/css/dark-theme.css')}}"/>
 	<link rel="stylesheet" href="{{asset('backend/assets/css/semi-dark.css')}}"/>
 	<link rel="stylesheet" href="{{asset('backend/assets/css/header-colors.css')}}"/>
-	<title>@yield('title', 'Elearn - Admin')</title>
+	<title>@yield('title', 'Diaconate Attendance - Admin')</title>
 </head>
 
 <body>
@@ -74,6 +74,7 @@
 				</div>				
 			@endif
 			@yield('admin');
+			@stack('scripts')
 		</div>
 		<!--end page wrapper -->
 		<!--start overlay-->
@@ -84,6 +85,9 @@
 		
 		
 		  <!--End Back To Top Button-->
+
+		
+
 		@include('admin.layouts.footer')
 	</div>
 	<!--end wrapper-->

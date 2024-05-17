@@ -46,5 +46,17 @@ class Attendance extends Model
     {
         $this->attributes['attendance_date'] = Carbon::parse($value);
     }
+
+    public static function getTotalAttendanceCount()
+    {
+        return self::count();
+    }
+
+    public static function getTotalAttendanceCountForToday()
+    {
+        return self::whereDate('created_at', Carbon::today())->count();
+    }
+
+    
     
 }

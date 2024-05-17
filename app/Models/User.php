@@ -41,7 +41,7 @@ class User extends Authenticatable
 
     public static function getUsers()
     {
-        return User::where([
+        return self::where([
             'role' => 'user'
         ])->get();
         // return User::all();
@@ -49,7 +49,13 @@ class User extends Authenticatable
 
     public static function getUserById($id)
     {
-        return User::find($id)->get();
+        return self::find($id)->get();
+    }
+
+
+    public static function countNonAdminUsers()
+    {
+        return self::where('role', '!=', 'admin')->count();
     }
 
 }
